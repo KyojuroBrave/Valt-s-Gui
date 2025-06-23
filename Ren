@@ -1,0 +1,37 @@
+-- Assumes this runs inside a LocalScript under the GUI
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local button = script.Parent -- this should be the Rengoku button
+
+local function giveRengokuTool()
+    local toolName = "Rengoku"
+
+    -- Delete old one if already exists
+    if player.Backpack:FindFirstChild(toolName) then
+        player.Backpack:FindFirstChild(toolName):Destroy()
+    end
+
+    -- Create the Tool
+    local tool = Instance.new("Tool")
+    tool.Name = toolName
+    tool.RequiresHandle = true
+
+    -- Create the Handle (the visible part)
+    local handle = Instance.new("Part")
+    handle.Name = "Handle"
+    handle.Size = Vector3.new(4, 5, 1)
+    handle.Anchored = false
+    handle.CanCollide = false
+    handle.Parent = tool
+
+    -- Add the image as a Decal on the front
+    local decal = Instance.new("Decal")
+    decal.Face = Enum.NormalId.Front
+    decal.Texture = "rbxassetid://114065777135894"
+    decal.Parent = handle
+
+    tool.Parent = player.Backpack
+end
+
+-- Connect the button click
+button.MouseButton1Click:Connect(giveRengokuTool)
