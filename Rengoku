@@ -82,7 +82,7 @@ local function giveRengokuTool()
 	local image = Instance.new("ImageLabel", billboard)
 	image.Size = UDim2.new(1, 0, 1, 0)
 	image.BackgroundTransparency = 1
-	image.Image = "rbxassetid://17540657731" -- <- Replace with real asset ID if hosted
+	image.Image = "rbxassetid://114065777135894" -- <- Replace with real asset ID if hosted
 
 	tool.Parent = player.Backpack
 	handlePart.Parent = tool
