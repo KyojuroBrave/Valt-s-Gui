@@ -1,0 +1,103 @@
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "ValtsPictureGUI"
+
+-- Main GUI Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0.4, 0, 0.5, 0)
+mainFrame.Position = UDim2.new(0.05, 0, 0.2, 0)
+mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+mainFrame.Name = "MainFrame"
+mainFrame.Parent = gui
+
+-- Title
+local title = Instance.new("TextLabel", mainFrame)
+title.Size = UDim2.new(1, 0, 0.1, 0)
+title.Text = "Valt's GUI - Picture Holder"
+title.BackgroundTransparency = 1
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.SourceSansBold
+title.TextScaled = true
+
+-- Close Button
+local closeBtn = Instance.new("TextButton", mainFrame)
+closeBtn.Size = UDim2.new(0.1, 0, 0.1, 0)
+closeBtn.Position = UDim2.new(0.9, 0, 0, 0)
+closeBtn.Text = "❌"
+closeBtn.BackgroundColor3 = Color3.fromRGB(60, 0, 0)
+closeBtn.TextColor3 = Color3.new(1, 1, 1)
+
+-- Minimize Button
+local minBtn = Instance.new("TextButton", mainFrame)
+minBtn.Size = UDim2.new(0.1, 0, 0.1, 0)
+minBtn.Position = UDim2.new(0.8, 0, 0, 0)
+minBtn.Text = "➖"
+minBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+minBtn.TextColor3 = Color3.new(1, 1, 1)
+
+-- Floating Logo Button
+local reopenBtn = Instance.new("TextButton", gui)
+reopenBtn.Size = UDim2.new(0, 50, 0, 50)
+reopenBtn.Position = UDim2.new(0.02, 0, 0.8, 0)
+reopenBtn.Text = "V"
+reopenBtn.TextScaled = true
+reopenBtn.BackgroundTransparency = 0.5
+reopenBtn.BackgroundColor3 = Color3.new(0, 0, 0)
+reopenBtn.Visible = false
+
+-- Rengoku Button
+local rengokuBtn = Instance.new("TextButton", mainFrame)
+rengokuBtn.Size = UDim2.new(0.4, 0, 0.1, 0)
+rengokuBtn.Position = UDim2.new(0.05, 0, 0.2, 0)
+rengokuBtn.Text = "Rengoku"
+rengokuBtn.BackgroundColor3 = Color3.fromRGB(120, 0, 0)
+rengokuBtn.TextColor3 = Color3.new(1, 1, 1)
+rengokuBtn.TextScaled = true
+
+-- Function to give the Rengoku tool
+local function giveRengokuTool()
+	local tool = Instance.new("Tool")
+	tool.Name = "Rengoku"
+	tool.RequiresHandle = true
+
+	local handle = Instance.new("Part")
+	handle.Name = "Handle"
+	handle.Size = Vector3.new(1, 1, 1)
+	handle.Anchored = false
+	handle.CanCollide = false
+	handle.Transparency = 0.1 -- Slight visibility to make BillboardGui appear
+	handle.Parent = tool
+	tool.Handle = handle
+
+	-- BillboardGui with image
+	local billboard = Instance.new("BillboardGui")
+	billboard.Size = UDim2.new(0, 300, 0, 400)
+	billboard.AlwaysOnTop = true
+	billboard.Parent = handle
+
+	local image = Instance.new("ImageLabel")
+	image.Size = UDim2.new(1, 0, 1, 0)
+	image.BackgroundTransparency = 1
+	image.Image = "rbxassetid://114065777135894"
+	image.Parent = billboard
+
+	tool.Parent = player.Backpack
+end
+
+-- Button Events
+rengokuBtn.MouseButton1Click:Connect(giveRengokuTool)
+
+closeBtn.MouseButton1Click:Connect(function()
+	mainFrame.Visible = false
+	reopenBtn.Visible = false
+end)
+
+minBtn.MouseButton1Click:Connect(function()
+	mainFrame.Visible = false
+	reopenBtn.Visible = true
+end)
+
+reopenBtn.MouseButton1Click:Connect(function()
+	mainFrame.Visible = true
+	reopenBtn.Visible = false
+end)
