@@ -1,0 +1,41 @@
+-- Rengoku Image Tool Script (LocalScript version for Arceus X or StarterGui)
+-- Runs when the Rengoku button is clicked
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local button = script.Parent  -- Place this LocalScript inside the "Rengoku" button
+
+local function giveRengokuTool()
+    local toolName = "Rengoku"
+
+    -- Remove old tool if it already exists
+    local existing = player.Backpack:FindFirstChild(toolName)
+    if existing then
+        existing:Destroy()
+    end
+
+    -- Create new Tool
+    local tool = Instance.new("Tool")
+    tool.Name = toolName
+    tool.RequiresHandle = true
+
+    -- Create Handle part
+    local handle = Instance.new("Part")
+    handle.Name = "Handle"
+    handle.Size = Vector3.new(4, 5, 0.2)  -- Size of the image surface
+    handle.Anchored = false
+    handle.CanCollide = false
+    handle.Parent = tool
+
+    -- Add Decal (Rengoku image) to the Handle
+    local decal = Instance.new("Decal")
+    decal.Texture = "rbxassetid://114065777135894"  -- Your Rengoku image
+    decal.Face = Enum.NormalId.Front
+    decal.Parent = handle
+
+    -- Finalize and give to player
+    tool.Parent = player.Backpack
+end
+
+-- Connect the button click to give the tool
+button.MouseButton1Click:Connect(giveRengokuTool)
